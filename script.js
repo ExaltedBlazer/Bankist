@@ -85,6 +85,17 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const createUsernames = function (accs) {
+  const username = user
+    .toLowerCase()
+    .split(' ')
+    .map(name => name[0].toUpperCase())
+    .join('');
+  return username;
+};
+
+createUsernames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -108,7 +119,7 @@ currenciesUnique.forEach(function (value, _, map) {
   //console.log(map);
 });
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -210,11 +221,12 @@ currenciesUnique.forEach(function (value, _, map) {
 });
 */
 
+/*
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCorrected = dogsJulia.slice();
-  console.log(dogsJuliaCorrected);
+  //console.log(dogsJuliaCorrected);
   dogsJuliaCorrected.splice(0, 1);
-  console.log(dogsJuliaCorrected);
+  //console.log(dogsJuliaCorrected);
   dogsJuliaCorrected.splice(-2);
   console.log(dogsJuliaCorrected);
 
@@ -222,9 +234,42 @@ const checkDogs = function (dogsJulia, dogsKate) {
   console.log(dogs);
   dogs.forEach(function (dog, i) {
     if (dog >= 3) {
-      console.log(`Dog number ${i + 1} is an adult, and is 5 years old`);
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy`);
     }
   });
 };
 
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+*/
+
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(mov => {
+  return mov * eurToUsd;
+});
+
+//console.log(movements);
+//console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+//console.log(movementsUSDfor);
+
+const movementsDescriptiions = movements.map(
+  (mov, i) =>
+    //console.log(mov);
+    //console.log(i);
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+
+  // if (mov > 0) {
+  //   return `Movement ${i + 1}: You deposited ${mov}`;
+  // } else {
+  //   return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+  // }
+);
+
+//console.log(movementsDescriptiions);
