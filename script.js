@@ -83,18 +83,22 @@ const displayMovements = function (movements) {
   });
 };
 
+//console.log(account4);
+
 displayMovements(account1.movements);
 
 const createUsernames = function (accs) {
-  const username = user
-    .toLowerCase()
-    .split(' ')
-    .map(name => name[0].toUpperCase())
-    .join('');
-  return username;
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0].toUpperCase())
+      .join('');
+  });
 };
 
 createUsernames(accounts);
+//console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -242,7 +246,7 @@ const checkDogs = function (dogsJulia, dogsKate) {
 };
 
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-*/
+
 
 const eurToUsd = 1.1;
 
@@ -273,3 +277,19 @@ const movementsDescriptiions = movements.map(
 );
 
 //console.log(movementsDescriptiions);
+*/
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const depositFor = [];
+for (const mov of movements) if (mov > 0) depositFor.push(mov);
+console.log(depositFor);
+
+const withdrawals = movements.filter(function (mov) {
+  return mov < 0;
+});
+console.log(withdrawals);
