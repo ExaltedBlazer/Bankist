@@ -100,6 +100,13 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 //console.log(accounts);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.innerHTML = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+//console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -277,7 +284,7 @@ const movementsDescriptiions = movements.map(
 );
 
 //console.log(movementsDescriptiions);
-*/
+
 
 const deposits = movements.filter(function (mov) {
   return mov > 0;
@@ -293,3 +300,12 @@ const withdrawals = movements.filter(function (mov) {
   return mov < 0;
 });
 console.log(withdrawals);
+*/
+
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  // console.log(acc);
+  // console.log(cur);
+  // console.log(i);
+  // console.log(arr);
+  return acc + cur;
+}, 0);
