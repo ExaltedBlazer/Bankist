@@ -100,6 +100,8 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 //console.log(accounts);
 
+const calcDisplaySummary = function (movements) {};
+
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.innerHTML = `${balance} EUR`;
@@ -300,7 +302,7 @@ const withdrawals = movements.filter(function (mov) {
   return mov < 0;
 });
 console.log(withdrawals);
-*/
+
 
 const balance = movements.reduce(function (acc, cur, i, arr) {
   // console.log(acc);
@@ -309,3 +311,44 @@ const balance = movements.reduce(function (acc, cur, i, arr) {
   // console.log(arr);
   return acc + cur;
 }, 0);
+
+////// Challenge 2
+
+const calcAverageHumanAge = function (ages) {
+  const humanAges = ages.map(age => {
+    if (age <= 2) {
+      return 2 * age;
+    } else if (age > 2) {
+      return 16 + age * 4;
+    }
+  });
+  //console.log(humanAges);
+  const adults = humanAges.filter(humanAge => humanAge >= 18);
+  console.log(adults);
+
+  const average =
+    adults.reduce((acc, age, i, arr) => acc + age, 0) / adults.length;
+  return average;
+};
+
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(`Average#1 ${avg1}`);
+console.log(`Average#2 ${avg2}`);
+*/
+
+const eurToUsd = 1.1;
+console.log(movements);
+
+// PIPELINE
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    //console.log(arr);
+    return mov * eurToUsd;
+  })
+  // .map(mov => mov *eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
