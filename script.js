@@ -100,15 +100,37 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 //console.log(accounts);
 
-const calcDisplaySummary = function (movements) {};
-
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.innerHTML = `${balance} EUR`;
+  labelBalance.innerHTML = `${balance} €`;
 };
 calcDisplayBalance(account1.movements);
 //console.log(accounts);
 
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+  console.log(out);
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+calcDisplaySummary(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -313,8 +335,9 @@ const balance = movements.reduce(function (acc, cur, i, arr) {
 }, 0);
 
 ////// Challenge 2
+*/
 
-const calcAverageHumanAge = function (ages) {
+const calcAverageHumanAge1 = ages => {
   const humanAges = ages.map(age => {
     if (age <= 2) {
       return 2 * age;
@@ -324,12 +347,14 @@ const calcAverageHumanAge = function (ages) {
   });
   //console.log(humanAges);
   const adults = humanAges.filter(humanAge => humanAge >= 18);
-  console.log(adults);
 
   const average =
     adults.reduce((acc, age, i, arr) => acc + age, 0) / adults.length;
   return average;
 };
+
+const calcAverageHumanAge = ages =>
+  ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4)).filter(age => age >= 18);
 
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 
@@ -337,7 +362,8 @@ const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(`Average#1 ${avg1}`);
 console.log(`Average#2 ${avg2}`);
-*/
+
+/*
 
 const eurToUsd = 1.1;
 console.log(movements);
@@ -352,3 +378,4 @@ const totalDepositsUSD = movements
   // .map(mov => mov *eurToUsd)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositsUSD);
+*/
