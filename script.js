@@ -85,8 +85,10 @@ const displayMovements = function (movements, sort = false) {
 //console.log(account4);
 
 const calcDisplayBalance = function (acc) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}€`;
+  console.log(acc);
+
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 //console.log(accounts);
 
@@ -189,6 +191,7 @@ btnTransfer.addEventListener('click', function (e) {
 
     //Update UI
     updateUI(currentAccount);
+    console.log(currentAccount);
   }
 });
 
