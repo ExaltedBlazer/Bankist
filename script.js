@@ -731,7 +731,7 @@ console.log(x);
 
 arr.fill(23, 2, 6);
 console.log(arr);
-*/
+
 
 //Use new array constructtor
 const arr = [1, 2, 3, 4, 5, 6, 7];
@@ -760,7 +760,24 @@ console.log(z);
 labelBalance.addEventListener('click', function (e) {
   //console.log(e);
   const movementsUI = Array.from(
-    document.querySelectorAll('.movements__value')
+    document.querySelectorAll('.movements__value'),
+    el => Nuumber(el.textContent.replace('€', ''))
   );
-  console.log(movementsUI.map(el => el.textContent.replace('€', '')));
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2);
 });
+*/
+
+console.log(movements);
+const reversedMov = movements.toReversed();
+console.log(reversedMov);
+
+//toSorted (sort), toSpliced (slice)
+
+const newMovements = movements.with(1, 2000);
+console.log(newMovements);
+
+//movements[1] = 2000;
+console.log(movements);
