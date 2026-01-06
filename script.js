@@ -842,3 +842,39 @@ console.log(`${ownersTooMuch.join(' and ')}'s dogs are eating too much`);
 console.log(`${ownersTooLittle.join(' and ')}'s dogs are eating too little`);
 
 console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+const checkEatingOkay = dog =>
+  dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9;
+
+console.log(dogs.every(checkEatingOkay));
+
+const dogsEatingOkay = dogs.filter(checkEatingOkay);
+console.log(dogsEatingOkay);
+
+const dogsGroupedByPortion = Object.groupBy(dogs, dog => {
+  if (dog.curFood > dog.recFood) {
+    return 'too-much';
+  } else if (dog.curFood < dog.recFood) {
+    return 'too-little';
+  } else {
+    return 'exact';
+  }
+});
+
+const testObgArr = {
+  exact: [{}, {}],
+  'too-little': [{}, {}],
+  'too-much': [{}, {}],
+};
+console.log(testObgArr);
+
+console.log(dogsGroupedByPortion);
+
+const dogsGroupedByOwners = Object.groupBy(
+  dogs,
+  dog => `${dog.owners.length}-owners`
+);
+console.log(dogsGroupedByOwners);
+
+const dogsSorted = dogs.toSorted((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
